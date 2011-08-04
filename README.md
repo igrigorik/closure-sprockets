@@ -24,7 +24,7 @@ Finally, [download the latest version](http://code.google.com/closure/library/do
 If you decided to put your `closure-library` directory somewhere other than `vendor/assets`, then you'll have to update your environment config with the right path:
 
 ```ruby
-config.closure.lib = 'vendor/assets/path/to/closure-library
+config.closure.lib = 'vendor/assets/path/to/closure-library'
 ```
 
 ### License
