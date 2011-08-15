@@ -1,23 +1,29 @@
 # Closure Sprockets
 
-Sprockets processor for Google's [Closure tools](http://code.google.com/closure/).
+Sprockets preprocessor for Google's [Closure tools](http://code.google.com/closure/).
 
 ## Integrating with Rails 3
 
-If you want to use closure as your JS library in Rails 3, add the gem to your Gemfile:
+If you want to use closure as your Javascript library in Rails 3, add this gem to your Gemfile:
 
 ```ruby
 gem 'closure-sprockets'
-gem 'closure-compiler' # optional, see below
 ````
+The gem ships with a Railtie which will automatically register a Closure preprocessor. From here, two more steps:
 
-If you also want to use the closure compressor to minify your Javascript, then change your environment config to:
+- [Download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets`
+- Write some closure code!
 
-```ruby
-config.assets.js_compressor = Closure::Compiler.new
+```js
+// in one of your javascript files
+goog.require('goog.dom');
+
+newHeader = goog.dom.createDom('h1', {}, 'Hello world!');
+goog.dom.appendChild(document.body, newHeader);
+}
 ```
 
-Finally, [download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets`.
+That's it! Point your browser at your page and you should have a hello world greeting from Google Closure, preprocessed by the Rails 3 Asset Pipeline and without any external Python dependencies or dynamic Javascript loading.
 
 ## Optional configuration
 
@@ -25,6 +31,20 @@ If you decided to put your `closure-library` directory somewhere other than `ven
 
 ```ruby
 config.closure.lib = 'vendor/assets/path/to/closure-library'
+```
+
+## Using Closure Compressor for Minification
+
+Closure also provides its own Javascript compressor. If you wish to use it, pull in the [closure-compiler](https://github.com/documentcloud/closure-compiler) gem:
+
+```ruby
+# in your Gemfile
+gem 'closure-compiler'
+````
+
+```ruby
+# in your environment configuration
+config.assets.js_compressor = Closure::Compiler.new
 ```
 
 ### License
