@@ -20,7 +20,6 @@ goog.require('goog.dom');
 
 newHeader = goog.dom.createDom('h1', {}, 'Hello world!');
 goog.dom.appendChild(document.body, newHeader);
-}
 ```
 
 That's it! Point your browser at your page and you should have a hello world greeting from Google Closure, preprocessed by the Rails 3 Asset Pipeline and without any external Python dependencies or dynamic Javascript loading.
