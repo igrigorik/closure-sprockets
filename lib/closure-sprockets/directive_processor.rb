@@ -3,6 +3,7 @@ class ClosureDependenciesProcessor < Tilt::Template
 
   def evaluate(context, locals, &block)
     context.require_asset 'goog/base'
+    context.require_asset 'soyutils'
 
     data.lines.each do |line|
 

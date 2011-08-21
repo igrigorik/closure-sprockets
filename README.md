@@ -1,6 +1,6 @@
 # Closure Sprockets
 
-Sprockets preprocessor for Google's [Closure tools](http://code.google.com/closure/).
+Sprockets preprocessor for Google's [Closure tools](http://code.google.com/closure/) + Closure-templates (soy) compiler.
 
 ## Integrating with Rails 3
 
@@ -20,6 +20,26 @@ goog.require('goog.dom');
 
 newHeader = goog.dom.createDom('h1', {}, 'Hello world!');
 goog.dom.appendChild(document.body, newHeader);
+```
+
+You can also add a `name.soy` template in your assets folder, and it will be automatically compiled to Javascript for you! Ex:
+
+```js
+/** hello.soy */
+
+{namespace examples.simple}
+
+/**
+ * Says hello to the world.
+ */
+{template .helloSoy}
+  Hello from Soy!
+{/template}
+```
+
+```js
+var soy = goog.dom.createDom('h1', {'style': 'background-color:#EEE'}, examples.simple.helloSoy());
+goog.dom.appendChild(document.body, soy);
 ```
 
 That's it! Point your browser at your page and you should have a hello world greeting from Google Closure, preprocessed by the Rails 3 Asset Pipeline and without any external Python dependencies or dynamic Javascript loading.
