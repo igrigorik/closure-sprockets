@@ -66,6 +66,14 @@ gem 'closure-compiler'
 config.assets.js_compressor = Closure::Compiler.new
 ```
 
+If you are not using the closure compiler, then you may want to disable the dynamic deps.js loading. To do so, add the following snippet in `application.html.erb` above the javascript_include tag:
+
+```html
+    <script type="text/javascript">
+      var CLOSURE_NO_DEPS = true;
+    </script>
+```
+
 ### License
 
 (MIT License) - Copyright (c) 2011 Ilya Grigorik
