@@ -1,6 +1,6 @@
 # Closure Sprockets
 
-Sprockets preprocessor for Google's [Closure tools](http://code.google.com/closure/) + Closure-templates (soy) compiler.
+Sprockets preprocessor for Google's [Closure tools](http://code.google.com/closure/) + Closure-templates (soy) compiler + Closure stylesheets (gss) compiler.
 
 ## Integrating with Rails 3
 
@@ -13,6 +13,9 @@ The gem ships with a Railtie which will automatically register a Closure preproc
 
 - [Download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets`
 - Write some closure code!
+
+
+### Javascripts
 
 ```js
 // in one of your javascript files
@@ -43,6 +46,43 @@ goog.dom.appendChild(document.body, soy);
 ```
 
 That's it! Point your browser at your page and you should have a hello world greeting from Google Closure, preprocessed by the Rails 3 Asset Pipeline and without any external Python dependencies or dynamic Javascript loading.
+
+
+### Stylesheets
+
+You can use also [closure stylesheets](http://code.google.com/p/closure-stylesheets/) in .gss files
+
+```css
+/** style.gss **/
+
+@def BG_COLOR              rgb(235, 239, 249);
+
+@def DIALOG_BORDER_COLOR   rgb(107, 144, 218);
+@def DIALOG_BG_COLOR       BG_COLOR;
+
+body {
+  background-color: BG_COLOR;
+}
+
+.dialog {
+  background-color: DIALOG_BG_COLOR;
+  border: 1px solid DIALOG_BORDER_COLOR;
+}
+```
+
+GSS files will be compiled automatically to CSS:
+
+```css
+body {
+  background-color: #ebeff9;
+}
+.dialog {
+  background-color: #ebeff9;
+  border: 1px solid #6b90da;
+}
+```
+
+
 
 ## Optional configuration
 

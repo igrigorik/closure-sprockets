@@ -9,6 +9,7 @@ module ClosureProcessor
 
       app.assets.register_preprocessor 'application/javascript', ClosureDependenciesProcessor
       app.assets.register_engine '.soy', SoyTemplateProcessor
+      app.assets.register_engine '.gss', GssTemplateProcessor
     end
 
   end
