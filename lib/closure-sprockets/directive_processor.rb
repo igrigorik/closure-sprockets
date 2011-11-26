@@ -12,7 +12,7 @@ class ClosureDependenciesProcessor < Tilt::Template
         next if mod =~ /^Test/
         sub = mod if sub.nil?
 
-        dep = [goog, mod, sub].compact.join("/").downcase
+        dep = [goog, mod, sub].compact.join("/")
         context.require_asset(dep)
       end
     end
