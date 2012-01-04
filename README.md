@@ -21,8 +21,12 @@ The gem ships with a Railtie which will automatically register a Closure preproc
 // in one of your javascript files
 goog.require('goog.dom');
 
-newHeader = goog.dom.createDom('h1', {}, 'Hello world!');
-goog.dom.appendChild(document.body, newHeader);
+function sayHello() {
+  newHeader = goog.dom.createDom('h1', {}, 'Hello world!');
+  goog.dom.appendChild(document.body, newHeader);
+};
+
+window.onload = sayHello;
 ```
 
 You can also add a `name.soy` template in your assets folder, and it will be automatically compiled to Javascript for you! Ex:
