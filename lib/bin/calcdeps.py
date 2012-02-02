@@ -45,6 +45,7 @@ req_regex = re.compile('goog\.require\s*\(\s*[\'\"]([^\)]+)[\'\"]\s*\)')
 prov_regex = re.compile('goog\.provide\s*\(\s*[\'\"]([^\)]+)[\'\"]\s*\)')
 ns_regex = re.compile('^ns:((\w+\.)*(\w+))$')
 version_regex = re.compile('[\.0-9]+')
+js_file_regex = re.compile(r'^.+\.js(\..*)?$')
 
 
 def IsValidFile(ref):
@@ -54,7 +55,8 @@ def IsValidFile(ref):
 
 def IsJsFile(ref):
   """Returns true if the provided reference is a Javascript file."""
-  return ref.endswith('.js')
+  return js_file_regex.match(ref)
+  # return ref.endswith('.js')
 
 
 def IsNamespace(ref):
