@@ -31,7 +31,7 @@ function sayHello() {
 window.onload = sayHello;
 ```
 
-You can also add a `name.soy` template in your assets folder and require it by standart require directive, and it will be automatically compiled to Javascript for you! Ex:
+You can also add a `name.soy` template in your assets folder and require it by standard `require` directive, and it will be automatically compiled to Javascript for you! Ex:
 
 ```js
 /** hello.soy */
