@@ -12,10 +12,8 @@ gem 'closure-sprockets'
 The gem ships with a Railtie which will automatically register a Closure preprocessor. From here, three more steps:
 
 - [Download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets` or another appropriate folder
-- Create require_file.js that will be your closure start point and include it with new directive `require_closure`:
-```js
-//= require_closure require_file
-````
+- Create `require_file.js` that will be your closure start point and include it with new directive `require_closure` at your `application.js`:  
+`//= require_closure require_file`
 - Write some closure code!
 
 
