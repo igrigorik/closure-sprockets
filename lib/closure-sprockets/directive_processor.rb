@@ -7,9 +7,9 @@ class ClosureDirectiveProcessor < Sprockets::DirectiveProcessor
     cmd = File.expand_path "../bin/calcdeps.py", File.dirname(__FILE__)
     
     # Get only application lookup paths
-    context.environment.paths.select{ |p| p if p.include? context.environment.root }.each do |path|
-      # cmd << " --root=#{path}" # for closurebuilder.py script
-      cmd << " --path=#{path}"
+    context.environment.paths.each do |p|
+      # cmd << " --root=#{p}" # for closurebuilder.py script
+      cmd << " --path=#{p}"
     end
 
     # closurebuilder.py needs some input files to start deps searching
@@ -20,7 +20,7 @@ class ClosureDirectiveProcessor < Sprockets::DirectiveProcessor
     # results = `#{cmd}`.split "\n" # for closurebuilder.py script
     results = `#{cmd} --output_mode=list`.split "\n"
     
-    # Finally require calculated deps
-    results.each{|dep| context.require_asset dep };
+    # Finally require calculated assets
+    results.each{|asset| context.require_asset asset };
   end
 end
