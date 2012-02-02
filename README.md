@@ -116,4 +116,4 @@ If you are not using the closure compiler, then you may want to disable the dyna
 
 ### License
 
-(MIT License) - Copyright (c) 2011 Ilya Grigorik
+(MIT License) - Copyright &copy; 2011 Ilya Grigorik
