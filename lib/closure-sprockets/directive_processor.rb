@@ -1,3 +1,5 @@
+require "sprockets/directive_processor"
+
 class ClosureDirectiveProcessor < Sprockets::DirectiveProcessor
   def process_require_closure_directive(path)
     # Locate python script that helps us to calculate deps
