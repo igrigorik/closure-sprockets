@@ -9,16 +9,18 @@ If you want to use closure as your Javascript library in Rails 3, add this gem t
 ```ruby
 gem 'closure-sprockets'
 ````
-The gem ships with a Railtie which will automatically register a Closure preprocessor. From here, two more steps:
+The gem ships with a Railtie which will automatically register a Closure preprocessor. From here, three more steps:
 
-- [Download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets`
+- [Download the latest version](http://code.google.com/closure/library/docs/gettingstarted.html) of closure library from Google and put it in `vendor/assets` or another appropriate folder
+- Create `require_file.js` that will be your closure start point and include it with new directive `require_closure` at your `application.js`:  
+`//= require_closure require_file`
 - Write some closure code!
 
 
 ### Javascripts
 
 ```js
-// in one of your javascript files
+// in your javascript `require_file.js` file or any depended file
 goog.require('goog.dom');
 
 function sayHello() {
@@ -29,7 +31,7 @@ function sayHello() {
 window.onload = sayHello;
 ```
 
-You can also add a `name.soy` template in your assets folder, and it will be automatically compiled to Javascript for you! Ex:
+You can also add a `name.soy` template in your assets folder and require it by standard `require` directive, and it will be automatically compiled to Javascript for you! Ex:
 
 ```js
 /** hello.soy */
@@ -45,6 +47,8 @@ You can also add a `name.soy` template in your assets folder, and it will be aut
 ```
 
 ```js
+//= require examples/simple
+
 var soy = goog.dom.createDom('h1', {'style': 'background-color:#EEE'}, examples.simple.helloSoy());
 goog.dom.appendChild(document.body, soy);
 ```
@@ -88,14 +92,6 @@ body {
 
 
 
-## Optional configuration
-
-If you decided to put your `closure-library` directory somewhere other than `vendor/assets`, then you'll have to update your environment config with the right path:
-
-```ruby
-config.closure.lib = 'vendor/assets/path/to/closure-library'
-```
-
 ## Using Closure Compressor for Minification
 
 Closure also provides its own Javascript compressor. If you wish to use it, pull in the [closure-compiler](https://github.com/documentcloud/closure-compiler) gem:
@@ -113,11 +109,11 @@ config.assets.js_compressor = Closure::Compiler.new
 If you are not using the closure compiler, then you may want to disable the dynamic deps.js loading. To do so, add the following snippet in `application.html.erb` above the javascript_include tag:
 
 ```html
-    <script type="text/javascript">
-      var CLOSURE_NO_DEPS = true;
-    </script>
+<script type="text/javascript">
+  var CLOSURE_NO_DEPS = true;
+</script>
 ```
 
 ### License
 
-(MIT License) - Copyright (c) 2011 Ilya Grigorik
+(MIT License) - Copyright &copy; 2011 Ilya Grigorik
