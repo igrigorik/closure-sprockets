@@ -1,23 +1,27 @@
-class SoyTemplateProcessor < Tilt::Template
-  COMPILER_ROOT = File.expand_path(File.dirname(__FILE__))
-  COMPILER_JAR  = File.join(COMPILER_ROOT, "/../jar/SoyToJsSrcCompiler.jar")
+module Closure
+  module Sprockets
+    class SoyTemplateProcessor < Tilt::Template
+      COMPILER_ROOT = File.expand_path(File.dirname(__FILE__))
+      COMPILER_JAR  = File.join(COMPILER_ROOT, "/../jar/SoyToJsSrcCompiler.jar")
 
-  self.default_mime_type = 'application/javascript'
+      self.default_mime_type = 'application/javascript'
 
-  def self.engine_initialized?; true; end
-  def initialize_engine; end
-  def prepare; end
+      def self.engine_initialized?; true; end
+      def initialize_engine; end
+      def prepare; end
 
-  def evaluate(context, locals, &block)
-    context.require_asset 'soyutils'
+      def evaluate(context, locals, &block)
+        context.require_asset 'soyutils'
 
-    # not the prettiest way to do this, but it works, for now...
-    out = file.gsub(/soy$/, 'soyjs')
-    `java -jar #{COMPILER_JAR} --outputPathFormat #{out} #{file}`
+        # not the prettiest way to do this, but it works, for now...
+        out = file.gsub(/soy$/, 'soyjs')
+        `java -jar #{COMPILER_JAR} --outputPathFormat #{out} #{file}`
 
-    @output = IO.read(out)
-    File.delete(out)
+        @output = IO.read(out)
+        File.delete(out)
 
-    @output
+        @output
+      end
+    end
   end
 end
