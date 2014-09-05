@@ -5,12 +5,14 @@ require 'shellwords'
 module Closure
   module Sprockets
     class DirectiveProcessor < ::Sprockets::DirectiveProcessor
+      CALCDEPS_PY = File.expand_path("../bin/calcdeps.py", File.dirname(__FILE__))
+
       def process_require_closure_directive(path)
         # Locate python script that helps us to calculate deps
         # cmd = File.expand_path "../bin/build/closurebuilder.py", File.dirname(__FILE__)
 
         # Use old one script, coz it could calculate deps much easier for begginers without any project's namespaces
-        cmd = File.expand_path("../bin/calcdeps.py", File.dirname(__FILE__)).shellescape
+        cmd = CALCDEPS_PY.shellescape
 
         # Get only application lookup paths
         context.environment.paths.each do |p|
