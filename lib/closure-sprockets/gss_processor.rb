@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module Closure
   module Sprockets
     class GssTemplateProcessor < Tilt::Template
