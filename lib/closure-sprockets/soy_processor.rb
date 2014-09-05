@@ -15,7 +15,7 @@ module Closure
 
         # not the prettiest way to do this, but it works, for now...
         out = file.gsub(/soy$/, 'soyjs')
-        `java -jar #{COMPILER_JAR} --outputPathFormat #{out} #{file}`
+        `java -jar #{COMPILER_JAR.shellescape} --outputPathFormat #{out.shellescape} #{file.shellescape}`
 
         @output = IO.read(out)
         File.delete(out)

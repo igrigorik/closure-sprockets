@@ -13,7 +13,7 @@ module Closure
       def evaluate(context, locals, &block)
         # not the prettiest way to do this, but it works, for now...
         out = file.gsub(/gss$/, 'css')
-        `java -jar #{COMPILER_JAR} --output-file #{out} --pretty-print #{file}`
+        `java -jar #{COMPILER_JAR.shellescape} --output-file #{out.shellescape} --pretty-print #{file.shellescape}`
 
         @output = IO.read(out)
         File.delete(out)
